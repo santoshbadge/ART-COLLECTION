@@ -1,0 +1,60 @@
+<div nxLayout="grid">
+  <div nxRow>
+    <div nxCol="12" nxColOffset="5" class="docs-grid-colored-col">
+      <h1 nxHeadline="subsection-medium" class="nx-font-weight-bold">
+        ART COLLECTION
+      </h1>
+    </div>
+  </div>
+
+  <div nxRow>
+    <div nxCol="12, 12, 6">
+      <!-- Multiselect dropdown in not working with @aquila Hence added single select dropdown -->
+      <nx-formfield nxLabel="Filter:">
+        <nx-dropdown (selectionChange)="applFfilter()">
+          <nx-dropdown-item *ngFor="let option of filterList" [nxValue]="option"></nx-dropdown-item>
+        </nx-dropdown>
+      </nx-formfield>
+
+    </div>
+    <div nxCol="12, 12, 6">
+      <nx-formfield nxLabel="Sort by:">
+        <nx-dropdown (selectionChange)="applySort()">
+          <nx-dropdown-item nxValue="Name"></nx-dropdown-item>
+          <nx-dropdown-item nxValue="Artist"></nx-dropdown-item>
+          <nx-dropdown-item nxValue="Date"></nx-dropdown-item>
+        </nx-dropdown>
+      </nx-formfield>
+    </div>
+  </div>
+</div>
+
+
+<div class="image-overview">
+  <div nxLayout="grid maxwidth">
+    <div nxRow>
+      <div class="imageWrapper nx-margin-bottom-s margin-box" nxCol="3" *ngFor="let art of finalGalleryData">
+        <nx-spinner nxSize="large" *ngIf="art.image == ''"></nx-spinner>
+        <figure nxFigure>
+          <img src="{{art.image}}" alt="" />
+        </figure>
+        <span>{{art.artWorkName}}</span>
+        <span>{{art.artist}}</span>
+        <span>{{art.material}}</span>
+        <span *ngIf="art.dateStart !== art.dateEnd">{{art.location}} ({{art.dateStart}} - {{art.dateEnd}})</span>
+        <span *ngIf="art.dateStart == art.dateEnd">{{art.location}} ({{art.dateStart}})</span>
+        <span *ngIf="!art.dateStart && !art.dateEnd">{{art.location}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div nxLayout="grid">
+  <div nxRow>
+    <div nxCol="12" nxColOffset="5" class="docs-grid-colored-col">
+      <nx-pagination [nxCount]="count" [nxPage]="page" [nxPerPage]="perPage" (nxGoPrev)="prevPage()"
+        (nxGoNext)="nextPage()">
+      </nx-pagination>
+    </div>
+  </div>
+</div>

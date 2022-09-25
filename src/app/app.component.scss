@@ -1,0 +1,14 @@
+@import "@aposin/ng-aquila/css/utilities.css";
+
+:host ::ng-deep .image-overview .nx-grid__row {
+    margin-top: 20px;
+}
+
+
+.imageWrapper {
+    border: 1px solid rgb(104, 204, 184);
+}
+
+span{
+    display: block;
+}
